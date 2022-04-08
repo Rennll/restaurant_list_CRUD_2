@@ -20,6 +20,9 @@
 
 <!-- restaurant list -->
 <div class="container mt-5">
+  {{#unless isSearchExist}}
+    <h2>your input is invalid.</h2>
+  {{/unless}}
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">

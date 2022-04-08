@@ -24,13 +24,13 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
-    .then(restaurants => res.render('index', { restaurants }))
+    .then(restaurants => res.render('index', { restaurants, isSearchExist: true }))
     .catch(err => console.error(err))
 })
 
 // search
 app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
+  const keyword = req.query.keyword.trim()
 
   // $regex 提供了在查詢 (query) 中找到符合的字串
   // $options: 'i' 代表大小寫皆可
@@ -43,7 +43,7 @@ app.get('/search', (req, res) => {
       ]
     })
     .lean()
-    .then(restaurants => res.render('index', { restaurants }))
+    .then(restaurants => res.render('index', { restaurants, isSearchExist: restaurants.length}))
     .catch(err => console.error(err))
 })
 
