@@ -46,6 +46,16 @@ app.get('/search', (req, res) => {
     .catch(err => console.error(err))
 })
 
+// view a restaurant's detail page
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(err => console.error(err))
+})
+
 // start and listen server
 app.listen(port, () => {
   console.log(`This website is running on http://localhost:${port}`)
