@@ -18,6 +18,7 @@ app.set('view engine', 'hbs')
 
 // setting static files
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 // setting routes
 app.get('/', (req, res) => {
@@ -53,6 +54,30 @@ app.get('/restaurants/:id', (req, res) => {
   return Restaurant.findById(id)
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
+    .catch(err => console.error(err))
+})
+
+// routes to new a item page
+app.get('/new', (req, res) => {
+  res.render('edit')
+})
+
+// add a restaurant
+app.post('/new', (req, res) => {
+  const restaurant = req.body
+
+  return Restaurant.create({
+      name: restaurant.name,
+      name_en: restaurant.name_en,
+      category: restaurant.category,
+      image: restaurant.image,
+      location: restaurant.location,
+      phone: restaurant.phone,
+      google_map: restaurant.google_map,
+      rating: restaurant.rating,
+      description: restaurant.description,
+    })
+    .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 })
 
