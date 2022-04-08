@@ -43,7 +43,7 @@ app.get('/search', (req, res) => {
       ]
     })
     .lean()
-    .then(restaurants => res.render('index', { restaurants, isSearchExist: restaurants.length}))
+    .then(restaurants => res.render('index', { restaurants, isSearchExist: restaurants.length, keyword }))
     .catch(err => console.error(err))
 })
 
