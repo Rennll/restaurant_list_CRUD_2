@@ -13,6 +13,7 @@ db.once('open', () => {
   // generate Restaurant seeds
   for (const restaurant of restaurants) {
     Restaurant.create({
+      id: restaurant.id,
       name: restaurant.name,
       name_en: restaurant.name_en,
       category: restaurant.category,
