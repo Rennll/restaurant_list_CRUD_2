@@ -59,7 +59,7 @@ app.get('/restaurants/:id', (req, res) => {
 
 // routes to new a item page
 app.get('/new', (req, res) => {
-  res.render('edit')
+  res.render('new')
 })
 
 // add a restaurant
@@ -78,6 +78,38 @@ app.post('/new', (req, res) => {
       description: restaurant.description,
     })
     .then(() => res.redirect('/'))
+    .catch(err => console.error(err))
+})
+
+// to a restaurant edit page
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(err => console.error(err))
+})
+
+// edited a restaurant and update
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const restaurant = req.body
+
+  return Restaurant.findById(id)
+    .then(item => {
+      item.name = restaurant.name
+      item.name_en = restaurant.name_en
+      item.category = restaurant.category
+      item.image = restaurant.image
+      item.location = restaurant.location
+      item.phone = restaurant.phone
+      item.google_map = restaurant.google_map
+      item.rating = restaurant.rating
+      item.description = restaurant.description
+      return item.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
     .catch(err => console.error(err))
 })
 
