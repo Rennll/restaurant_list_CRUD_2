@@ -27,6 +27,25 @@ app.get('/', (req, res) => {
     .catch(err => console.error(err))
 })
 
+// search
+app.get('/search', (req, res) => {
+  const keyword = req.query.keyword
+
+  // $regex 提供了在查詢 (query) 中找到符合的字串
+  // $options: 'i' 代表大小寫皆可
+  // $or 代表任一條件符合皆可
+  Restaurant.find({
+    $or: [
+        { name: { $regex: keyword, $options: 'i' }}, 
+        { name_en: { $regex: keyword, $options: 'i' }},
+        { category: { $regex: keyword, $options: 'i' }}
+      ]
+    })
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(err => console.error(err))
+})
+
 // start and listen server
 app.listen(port, () => {
   console.log(`This website is running on http://localhost:${port}`)
