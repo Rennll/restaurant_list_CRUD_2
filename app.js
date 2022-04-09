@@ -64,18 +64,18 @@ app.get('/new', (req, res) => {
 
 // add a restaurant
 app.post('/new', (req, res) => {
-  const restaurant = req.body
+  const { name, name_en, category, image, location, phone, google_map, rating, description} = req.body
 
   return Restaurant.create({
-      name: restaurant.name,
-      name_en: restaurant.name_en,
-      category: restaurant.category,
-      image: restaurant.image,
-      location: restaurant.location,
-      phone: restaurant.phone,
-      google_map: restaurant.google_map,
-      rating: restaurant.rating,
-      description: restaurant.description,
+      name,
+      name_en,
+      category,
+      image,
+      location,
+      phone,
+      google_map,
+      rating,
+      description
     })
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
@@ -94,19 +94,19 @@ app.get('/restaurants/:id/edit', (req, res) => {
 // edited a restaurant and update
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const restaurant = req.body
+  const  { name, name_en, category, image, location, phone, google_map, rating, description}  = req.body
 
   return Restaurant.findById(id)
     .then(item => {
-      item.name = restaurant.name
-      item.name_en = restaurant.name_en
-      item.category = restaurant.category
-      item.image = restaurant.image
-      item.location = restaurant.location
-      item.phone = restaurant.phone
-      item.google_map = restaurant.google_map
-      item.rating = restaurant.rating
-      item.description = restaurant.description
+      item.name = name
+      item.name_en = name_en
+      item.category = category
+      item.image = image
+      item.location = location
+      item.phone = phone
+      item.google_map = google_map
+      item.rating = rating
+      item.description = description
       return item.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
