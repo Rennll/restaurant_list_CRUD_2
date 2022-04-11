@@ -61,12 +61,12 @@ app.get('/restaurants/:id', (req, res) => {
 })
 
 // routes to new a item page
-app.get('/new', (req, res) => {
+app.get('/restaurants', (req, res) => {
   res.render('new')
 })
 
 // add a restaurant
-app.post('/new', (req, res) => {
+app.post('/restaurants', (req, res) => {
   const restaurant = req.body
 
   return Restaurant.create({ ...restaurant })
