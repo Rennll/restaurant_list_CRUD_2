@@ -1,13 +1,9 @@
-const mongoose = require('mongoose')
 const Restaurant = require('../restaurant')
 const restaurantList = require('../../restaurant')
+const db = require('../../config/mongoose')
 
-// setting mongoose connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-const db = mongoose.connection
-db.on('error', err => console.error(err))
+// setting mongoose only on open
 db.once('open', () => {
-  console.log('MongoDB is connected.')
   const restaurants = restaurantList.results
 
   // generate Restaurant seeds
