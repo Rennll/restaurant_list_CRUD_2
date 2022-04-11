@@ -1,5 +1,6 @@
+<h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
 <div class="container">
-  <form action="/restaurants" method="POST">
+  <form action="/restaurants/" method="POST" class="mb-5">
     <div class="form-group">
       <label for="name">餐廳名稱</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Enter restaurant name">
@@ -30,7 +31,8 @@
     </div>
     <div class="form-group">
       <label for="phone">餐廳電話</label>
-      <input type="text" class="form-control" id="phone"  name="phone" min="9" max="10" placeholder="Enter restaurant location">
+      <input type="text" class="form-control" id="phone" name="phone" min="9" max="10"
+        placeholder="Enter restaurant location">
     </div>
     <div class="form-group">
       <label for="google_map">餐廳的 google_map</label>
@@ -42,9 +44,10 @@
     </div>
     <div class="form-group">
       <label for="description">餐廳的敘述</label>
-      <textarea type="text" class="form-control" id="description" name="description" placeholder="Enter restaurant location"></textarea>
+      <textarea type="text" class="form-control" id="description" name="description"
+        placeholder="Enter restaurant location"></textarea>
     </div>
-    <button type="submit" class="btn btn-major">儲存</button>
+    <button type="submit" class="btn btn-major mr-2">儲存</button>
     <a href="/">Back</a>
   </form>
 </div>

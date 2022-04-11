@@ -1,5 +1,6 @@
+<h1 class="mb-1 restaurant-show-title">修改餐廳</h1>
 <div class="container">
-  <form action="/restaurants/{{ restaurant._id }}?_method=put" method="POST">
+  <form action="/restaurants/{{ restaurant._id }}?_method=put" method="POST" class="mb-5">
     <div class="form-group">
       <label for="name">餐廳名稱</label>
       <input type="text" class="form-control" id="name" name="name" value="{{ restaurant.name }}"
@@ -51,7 +52,7 @@
       <textarea type="text" class="form-control" id="description" name="description"
         placeholder="Enter restaurant location">{{ restaurant.description }}</textarea>
     </div>
-    <button type="submit" class="btn btn-major">儲存</button>
+    <button type="submit" class="btn btn-major mr-2">儲存</button>
     <a href="/">Back</a>
   </form>
 </div>

@@ -8,9 +8,6 @@
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." value="{{ keyword }}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button" style="border-radius: 0.2em"><i class="fas fa-search"></i></button>
-            <a href="/restaurants" style="margin-left: 0.5em;">
-              <button type="button" class="btn btn-major">Create Item</button>
-            </a>
           </div>
         </div>
       </form>
@@ -20,8 +17,8 @@
 
 <!-- restaurant list -->
 <div class="container mt-5">
-  {{#unless isSearchExist}}
-    <h2>your keyword, {{ keyword}}, is invalid.</h2>
+  {{#unless isResultExist}}
+    <h2>there's no related result of {{ keyword }}</h2>
   {{/unless}}
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
@@ -43,10 +40,10 @@
                 </span>
 
               </div>
-              <div class="card-footer text-end">
-                <a href="/restaurants/{{ this._id }}" class="">Detail</a>
-                <a href="/restaurants/{{ this._id }}/edit" class="">Edit</a>
-                <form action="/restaurants/{{ this._id }}?_method=delete" method="post" style="display:inline">
+              <div class="card-footer d-flex justify-content-end align-items-center">
+                <a href="/restaurants/{{ this._id }}" class="m-2">Detail</a>
+                <a href="/restaurants/{{ this._id }}/edit" class="m-2">Edit</a>
+                <form action="/restaurants/{{ this._id }}?_method=delete" method="post" style="display:inline" class="ml-2">
                   <button type="submit" class="btn btn-major">Delete</button>
                 </form>
               </div>

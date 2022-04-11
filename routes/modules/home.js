@@ -6,7 +6,7 @@ const Restaurant = require('../../models/restaurant')
 router.get('/', (req, res) => {
   Restaurant.find()
     .lean()
-    .then(restaurants => res.render('index', { restaurants, isSearchExist: true }))
+    .then(restaurants => res.render('index', { restaurants, isResultExist: true }))
     .catch(err => console.error(err))
 })
 
@@ -25,7 +25,7 @@ router.get('/search', (req, res) => {
     ]
   })
     .lean()
-    .then(restaurants => res.render('index', { restaurants, isSearchExist: restaurants.length, keyword }))
+    .then(restaurants => res.render('index', { restaurants, isResultExist: restaurants.length, keyword }))
     .catch(err => console.error(err))
 })
 
