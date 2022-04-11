@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   const restaurant = req.body
 
-  return Restaurant.create({ ...restaurant })
+  return Restaurant.create(restaurant)
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 })
