@@ -15,7 +15,7 @@ app.set('view engine', 'hbs')
 // setting static files, body-parser, method-override
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride("_method"))
+app.use(methodOverride('_method'))
 
 // setting routes
 app.use(routes)
