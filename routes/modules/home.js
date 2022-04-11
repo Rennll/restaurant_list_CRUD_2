@@ -29,4 +29,16 @@ router.get('/search', (req, res) => {
     .catch(err => console.error(err))
 })
 
+// index sort by button
+router.get('/:sort', (req, res) => {
+  const sortByKey = req.params.sort.split('_')
+  const sort = sortByKey[1] === 'asc' ? sortByKey[0] : '-' + sortByKey[0]
+
+  Restaurant.find()
+    .sort(sort)
+    .lean()
+    .then(restaurants => res.render('index', { restaurants, isResultExist: true }))
+    .catch(err => console.error(err))
+})
+
 module.exports = router
