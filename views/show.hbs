@@ -37,9 +37,9 @@
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{ restaurant.image }}" alt="{{ restaurant.name }}" style="max-width: 600px;">
     </div>
     <div>
-      <a href="/">Back</a>
-      <a href="/restaurants/{{ restaurant._id }}/edit" class="">Edit</a>
-      <form action="/restaurants/{{ restaurant._id }}?_method=delete" method="post" style="display:inline">
+      <a href="/" class="mx-2">Back</a>
+      <a href="/restaurants/{{ restaurant._id }}/edit" class="mx-2">Edit</a>
+      <form action="/restaurants/{{ restaurant._id }}?_method=delete" method="post" style="display:inline" class="mx-2">
         <button type="submit" class="btn btn-major">Delete</button>
       </form>
     </div>

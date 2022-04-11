@@ -17,6 +17,7 @@
 5. 提供使用者新增一間餐廳的資訊。
 6. 提供使用者修改一間餐廳的資訊。
 7. 提供使用者刪除一間餐廳的資訊。
+8. 提供使用者依照喜好做排序。
 
 ## Environment SetUp - 環境建置
 
@@ -28,7 +29,7 @@
 1. 開啟 terminal ，將專案複製到本機。
 
 ```
-git clone https://github.com/rennll/restaurant_list_CRUD.git
+git clone https://github.com/rennll/restaurant_list_CRUD_2.git
 ```
 
 2. 使用 terminal 切換至下載的資料夾。
