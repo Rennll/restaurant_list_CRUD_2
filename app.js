@@ -15,7 +15,7 @@ db.on('error', err => console.error(err))
 db.once('open', () => console.log('MongoDB is connected.'))
 
 // setting view engine by handlebars
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 // setting static files
@@ -40,11 +40,11 @@ app.get('/search', (req, res) => {
   // $or 代表任一條件符合皆可
   Restaurant.find({
     $or: [
-        { name: { $regex: keyword, $options: 'i' }}, 
-        { name_en: { $regex: keyword, $options: 'i' }},
-        { category: { $regex: keyword, $options: 'i' }}
-      ]
-    })
+      { name: { $regex: keyword, $options: 'i' } },
+      { name_en: { $regex: keyword, $options: 'i' } },
+      { category: { $regex: keyword, $options: 'i' } }
+    ]
+  })
     .lean()
     .then(restaurants => res.render('index', { restaurants, isSearchExist: restaurants.length, keyword }))
     .catch(err => console.error(err))
@@ -67,19 +67,9 @@ app.get('/new', (req, res) => {
 
 // add a restaurant
 app.post('/new', (req, res) => {
-  const { name, name_en, category, image, location, phone, google_map, rating, description} = req.body
+  const restaurant = req.body
 
-  return Restaurant.create({
-      name,
-      name_en,
-      category,
-      image,
-      location,
-      phone,
-      google_map,
-      rating,
-      description
-    })
+  return Restaurant.create({ ...restaurant })
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 })
@@ -97,19 +87,13 @@ app.get('/restaurants/:id/edit', (req, res) => {
 // edited a restaurant and update: use method override
 app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
-  const  { name, name_en, category, image, location, phone, google_map, rating, description}  = req.body
+  const restaurant = req.body
 
   return Restaurant.findById(id)
     .then(item => {
-      item.name = name
-      item.name_en = name_en
-      item.category = category
-      item.image = image
-      item.location = location
-      item.phone = phone
-      item.google_map = google_map
-      item.rating = rating
-      item.description = description
+      for (const key in restaurant) {
+        item[key] = restaurant[key]
+      }
       return item.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
