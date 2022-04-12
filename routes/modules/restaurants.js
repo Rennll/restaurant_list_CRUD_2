@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-// routes to new a item page
+// routes to new a item page: merge new.hbs to edit.hbs
 router.get('/new', (req, res) => {
-  return res.render('new')
+  return res.render('edit')
 })
 
 // add a restaurant
@@ -32,7 +32,7 @@ router.get('/:id/edit', (req, res) => {
 
   return Restaurant.findById(id)
     .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
+    .then(restaurant => res.render('edit', { restaurant, isEditPage: true }))
     .catch(err => console.error(err))
 })
 
