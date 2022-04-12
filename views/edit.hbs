@@ -1,19 +1,29 @@
 <h1 class="mb-1 restaurant-show-title">修改餐廳</h1>
 <div class="container">
-  <form action="/restaurants/{{ restaurant._id }}?_method=put" method="POST" class="mb-5">
+  <form action="/restaurants/{{ restaurant._id }}?_method=put" method="POST" class="mb-5" novalidate>
     <div class="form-group">
       <label for="name">餐廳名稱</label>
-      <input type="text" class="form-control" id="name" name="name" value="{{ restaurant.name }}"
-        placeholder="Enter restaurant name">
+      <input type="text" class="form-control" id="name" name="name" value="{{ restaurant.name }}" placeholder="Name"
+        required>
+      <div class="invalid-feedback">
+        請輸入餐廳名稱
+      </div>
     </div>
     <div class="form-group">
       <label for="name_en">餐廳英文名稱</label>
       <input type="text" class="form-control" id="name_en" name="name_en" value="{{ restaurant.name_en }}"
-        placeholder="Enter restaurant English name">
+        placeholder="English name" required>
+      <div class="invalid-feedback">
+        請輸入英文名稱
+      </div>
     </div>
     <div class="form-group">
       <label for="category">料理類型</label>
-      <input list="categories" class="form-control" name="category" value="{{ restaurant.category }}" id="category">
+      <input list="categories" class="form-control" id="category" name="category" value="{{ restaurant.category }}"
+        required>
+      <div class="invalid-feedback">
+        請選擇料理類型
+      </div>
       <datalist id="categories">
         <option>中東料理</option>
         <option>日本料理</option>
@@ -25,32 +35,52 @@
     </div>
     <div class="form-group">
       <label for="image">餐廳圖片</label>
-      <input type="text" class="form-control" id="image" name="image" value="{{ restaurant.image }}"
-        placeholder="Enter restaurant image">
+      <input type="url" class="form-control" id="image" name="image" value="{{ restaurant.image }}" placeholder="Image"
+        pattern="https://*.*/*.jpg" required>
+      <div class="invalid-feedback">
+        請輸入正確的圖片連結
+      </div>
     </div>
     <div class="form-group">
       <label for="location">餐廳地址</label>
       <input type="text" class="form-control" id="location" name="location" value="{{ restaurant.location }}"
-        placeholder="Enter restaurant location">
+        placeholder="Location" required>
+      <div class="invalid-feedback">
+        請輸入正確的地址
+      </div>
     </div>
     <div class="form-group">
       <label for="phone">餐廳電話</label>
-      <input type="text" class="form-control" id="phone" name="phone" min="9" max="10" value="{{ restaurant.phone }}"
-        placeholder="Enter restaurant location">
+      <input type="tel" class="form-control" id="phone" name="phone" minlength="9" maxlength="12"
+        value="{{ restaurant.phone }}" placeholder="Phone" required>
+      <div class="invalid-feedback">
+        請輸入正確的電話
+      </div>
     </div>
     <div class="form-group">
-      <label for="google_map">餐廳的 google_map</label>
-      <input type="text" class="form-control" id="google_map" name="google_map" value="{{ restaurant.google_map }}"
-        placeholder="Enter restaurant location">
+      <label for="google_map">餐廳的 google 地圖</label>
+      <input type="url" class="form-control" id="google_map" name="google_map" value="{{ restaurant.google_map }}"
+        pattern="https://*.*" placeholder="Google_map" required>
+      <div class="invalid-feedback">
+        請輸入正確的 Google 地圖網址
+      </div>
     </div>
     <div class="form-group">
       <label for="rating">餐廳的評分</label>
-      <input type="text" class="form-control" id="rating" name="rating" value="{{ restaurant.rating }}">
+      <input type="number" class="form-control" id="rating" name="rating" value="{{ restaurant.rating }}"
+        placeholder="Rating" min="1" max="5" step="0.1" required>
+      <div class="invalid-feedback">
+        請輸入正確的評分
+      </div>
     </div>
     <div class="form-group">
       <label for="description">餐廳的敘述</label>
-      <textarea type="text" class="form-control" id="description" name="description"
-        placeholder="Enter restaurant location">{{ restaurant.description }}</textarea>
+      <textarea type="text" class="form-control" id="description" name="description" placeholder="Description" required>
+        {{ restaurant.description }}
+      </textarea>
+      <div class="invalid-feedback">
+        請輸入描述
+      </div>
     </div>
     <button type="submit" class="btn btn-major mr-2">儲存</button>
     <a href="/">Back</a>
