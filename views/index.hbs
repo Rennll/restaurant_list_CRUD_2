@@ -4,9 +4,11 @@
     <div class="col-4">
       <form action="/search" display="inline">
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." value="{{ keyword }}" aria-describedby="search-button">
+          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+            value="{{ keyword }}" aria-describedby="search-button">
           <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button" style="border-radius: 0.2em"><i class="fas fa-search"></i></button>
+            <button class="btn btn-major" type="submit" id="search-button" style="border-radius: 0.2em"><i
+                class="fas fa-search"></i></button>
           </div>
         </div>
       </form>
@@ -14,7 +16,7 @@
     <div class="col-8 d-flex justify-content-end">
       <div class="dropdown">
         <button class="btn btn-major dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+          aria-haspopup="true" aria-expanded="false">
           Sort
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -31,39 +33,66 @@
 <!-- restaurant list -->
 <div class="container mt-5">
   {{#unless isResultExist}}
-    <h2>there's no related result of {{ keyword }}</h2>
+  <h2>there's no related result of {{ keyword }}</h2>
   {{/unless}}
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
-      <div class="card-columns">
+      <div class="card-columns" id="restaurant-list">
         {{#each restaurants}}
-          <a href="/restaurants/{{ this._id }}" class="text-secondary">
-            <div class="card mb-3">
-              <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
-              <div class="card-body p-3">
-                <h6 class="card-title mb-1">{{ this.name }}</h6>
+        <a href="/restaurants/{{ this._id }}" class="text-secondary">
+          <div class="card mb-3">
+            <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
+            <div class="card-body p-3">
+              <h6 class="card-title mb-1">{{ this.name }}</h6>
 
-                <div class="restaurant-category mb-1">
-                  <i class="fas fa-utensils pr-2"></i> {{ this.category }}
-                </div>
-
-                <span class="badge badge-pill badge-danger font-weight-normal">
-                  {{ this.rating }}
-                  <i class="fas fa-star fa-xs"></i>
-                </span>
-
+              <div class="restaurant-category mb-1">
+                <i class="fas fa-utensils pr-2"></i> {{ this.category }}
               </div>
-              <div class="card-footer d-flex justify-content-end align-items-center">
-                <a href="/restaurants/{{ this._id }}" class="m-2">Detail</a>
-                <a href="/restaurants/{{ this._id }}/edit" class="m-2">Edit</a>
-                <form action="/restaurants/{{ this._id }}?_method=delete" method="post" style="display:inline" class="ml-2">
-                  <button type="submit" class="btn btn-major">Delete</button>
-                </form>
-              </div>
+
+              <span class="badge badge-pill badge-danger font-weight-normal">
+                {{ this.rating }}
+                <i class="fas fa-star fa-xs"></i>
+              </span>
+
             </div>
-          </a>
+            <div class="card-footer d-flex justify-content-end align-items-center">
+              <a href="/restaurants/{{ this._id }}" class="m-2">Detail</a>
+              <a href="/restaurants/{{ this._id }}/edit" class="m-2">Edit</a>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+                id="delete-btn" data-id="{{ this._id }}" data-name="{{ this.name }}">
+                Delete
+              </button>
+            </div>
+          </div>
+        </a>
         {{/each}}
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you want to delete <span id="delete-restaurant-name"></span> ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <form action="" method="post" style="display:inline" class="ml-2" id="delete-form">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/javascripts/delete-listener.js"></script>
