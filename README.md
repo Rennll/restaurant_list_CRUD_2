@@ -44,14 +44,15 @@ cd restaurant_list
 npm install
 ```
 
-4. 等待下載完成後，執行 app.js
+4. 請設定環境變數 MONGODB_URI ，如果在 Bash(windows) 指令為下
+```
+export MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.ps0rf.mongodb.net/restaurant-list?retryWrites=true&w=majority"
+```
+
+5. 等待下載完成後，執行 app.js
 
 ```
 npm run start
-```
-5. 請設定環境變數 MONGODB_URI ，如果在 Bash(windows) 指令為下
-```
-export MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.ps0rf.mongodb.net/restaurant-list?retryWrites=true&w=majority"
 ```
 
 6. 等待伺服器啟動，並且出現以下字樣即代表成功運行。
