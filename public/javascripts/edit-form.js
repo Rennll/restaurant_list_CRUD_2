@@ -1,5 +1,5 @@
-const form = document.querySelector('form')
-const submitButton = document.querySelector('form button')
+const form = document.querySelector('#edit_form')
+const submitButton = document.querySelector('#edit_form #submit-btn')
 
 form.addEventListener('submit', function onFormSubmitted (event) {
   if (!form.checkValidity()) {
