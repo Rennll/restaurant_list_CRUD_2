@@ -1,6 +1,6 @@
 <h1 class="restaurant-show-title">Login</h1>
 <div class="container" style="max-width: 400px;">
-  <form action="/login" method="POST">
+  <form action="/users/login" method="POST">
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
       <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" required>
@@ -13,4 +13,7 @@
       <button type="submit" class="btn btn-major" style="width: 100%">Login</button>
     </div>    
   </form>
+  <p>
+    Do not have a account? <a href="/users/register">Register</a>
+  </p>
 </div>
