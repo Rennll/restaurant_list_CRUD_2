@@ -3,19 +3,19 @@
   <form action="/users/register" method="POST">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      <input type="text" name="name" id="name" placeholder="Enter name" class="form-control">
+      <input type="text" name="name" id="name" placeholder="Enter name" class="form-control" value="{{ name }}">
     </div>
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
-      <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" required>
+      <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" value="{{ email }}"required>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" required>
+      <input type="password" name="password" id="password" placeholder="Enter Password" class="form-control" value="{{ password }}" required>
     </div>
     <div class="mb-3">
       <label for="confirmedPassword" class="form-label">Confirm Password</label>
-      <input type="password" name="confirmedPassword" id="confirmedPassword" placeholder="Enter Password again" class="form-control" required>
+      <input type="password" name="confirmedPassword" id="confirmedPassword" placeholder="Enter Password again" class="form-control" value="{{ confirmedPassword }}" required>
     </div>
     <div class="mb-3">
       <button type="submit" class="btn btn-major" style="width: 100%">Register</button>
