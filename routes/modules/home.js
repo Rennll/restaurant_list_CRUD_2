@@ -4,7 +4,9 @@ const Restaurant = require('../../models/restaurant')
 
 // 將根目錄裡面的 route 放在這
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const userId = res.locals.user._id
+
+  Restaurant.find({ userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants, isResultExist: true }))
     .catch(err => console.error(err))
