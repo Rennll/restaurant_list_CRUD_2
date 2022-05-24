@@ -20,11 +20,15 @@ router.get('/search', (req, res) => {
   // $options: 'i' 代表大小寫皆可
   // $or 代表任一條件符合皆可
   Restaurant.find({
-    $or: [
-      { name: { $regex: keyword, $options: 'i' } },
-      { name_en: { $regex: keyword, $options: 'i' } },
-      { category: { $regex: keyword, $options: 'i' } }
-    ]
+    $and: [{
+      $or: [
+        { name: { $regex: keyword, $options: 'i' } },
+        { name_en: { $regex: keyword, $options: 'i' } },
+        { category: { $regex: keyword, $options: 'i' } }
+      ]
+    }, {
+      userId: res.locals.user._id
+    }]
   })
     .lean()
     .then(restaurants => res.render('index', { restaurants, isResultExist: restaurants.length, keyword }))
