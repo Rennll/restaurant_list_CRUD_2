@@ -39,8 +39,9 @@ router.get('/search', (req, res) => {
 router.get('/:sort', (req, res) => {
   const sortByKey = req.params.sort.split('_')
   const sort = sortByKey[1] === 'asc' ? sortByKey[0] : '-' + sortByKey[0]
+  const userId = res.locals.user._id
 
-  Restaurant.find()
+  Restaurant.find({ userId })
     .sort(sort)
     .lean()
     .then(restaurants => res.render('index', { restaurants, isResultExist: true }))
